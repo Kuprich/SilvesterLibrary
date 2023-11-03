@@ -1,10 +1,20 @@
-﻿using Vosk;
+﻿using Newtonsoft.Json;
+using System.Text.Json;
+using Vosk;
 
 namespace VoskTest;
 
 public class RecognizeService
 {
-   private Model _model;
+    private Model _model;
+    private class VoskResult
+    {
+        public string? Text { get; set; }
+        public override string? ToString()
+        {
+            return Text;
+        }
+    }
 
     public RecognizeService(string audioFilePath, string modelPath, int sampleRate = 48_000, int logLevel = 0)
     {
@@ -29,10 +39,12 @@ public class RecognizeService
         rec.SetWords(true);
         using (Stream source = File.OpenRead(AudioFilePath))
         {
-            byte[] buffer = new byte[SampleRate];
+            var bufferlength = new FileInfo(AudioFilePath).Length;
+            byte[] buffer = new byte[bufferlength];
             int bytesRead;
             while ((bytesRead = source.Read(buffer, 0, buffer.Length)) > 0)
             {
+                //rec.AcceptWaveform(buffer, bytesRead);
                 if (rec.AcceptWaveform(buffer, bytesRead))
                 {
                     Console.WriteLine(rec.Result());
@@ -43,16 +55,19 @@ public class RecognizeService
                 }
             }
         }
-        Console.WriteLine(rec.FinalResult());
+        var voskResult = JsonConvert
+            .DeserializeObject<VoskResult>(rec.FinalResult());
+        Console.WriteLine($"\n {voskResult}");
+
     }
 
-    public void DemoFloats(Model model)
+    public void DemoFloats()
     {
         // Demo float array
-        VoskRecognizer rec = new VoskRecognizer(model, 48000.0f);
-        using (Stream source = File.OpenRead("test_ru.wav"))
+        VoskRecognizer rec = new VoskRecognizer(_model, SampleRate);
+        using (Stream source = File.OpenRead(AudioFilePath))
         {
-            byte[] buffer = new byte[48000];
+            byte[] buffer = new byte[SampleRate];
             int bytesRead;
             while ((bytesRead = source.Read(buffer, 0, buffer.Length)) > 0)
             {
