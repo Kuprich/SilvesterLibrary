@@ -1,15 +1,16 @@
 ﻿using VoskTest;
 
 
-string outputfilePath = AudioConvertService.ConvertToWav("Захаров1.mp3");
+string outputfilePath = AudioConvertService.ConvertToWav("Захаров.mp3");
 
 RecognizeService recognizeService = new (
-    audioFilePath: outputfilePath,
-    modelPath: "model_ru",
+    modelPath: "model-ru",
     sampleRate: 48_000,
     logLevel: 0);
 
-recognizeService.DemoBytes();
+var result = recognizeService.RecognizeAudioFile(outputfilePath);
+
+Console.WriteLine(result.Text);
 
 //DemoBytes(model);
 //DemoFloats(model);
