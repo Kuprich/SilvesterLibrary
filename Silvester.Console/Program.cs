@@ -2,11 +2,12 @@
 using Silvester.Persistence.Services;
 
 IAudioConverterService audioConverterService = new FFMpegAudioConvertService();
-IRecognizeService recognizeService = new VoskRecognizeService();
 
+var recognizer = new VoskRecognitionService()
+    .WithConfigurationFromFile("VoskConfiguration.json");
 
 string outputfilePath = audioConverterService.ConvertToWav("Захаров.mp3");
 
-var result = recognizeService.RecognizeAudioFile(outputfilePath);
+var result = recognizer.RecognizeAudioFile(outputfilePath);
 
 Console.WriteLine(result?.Text);

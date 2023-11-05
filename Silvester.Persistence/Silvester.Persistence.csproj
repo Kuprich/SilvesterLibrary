@@ -16,4 +16,10 @@
 	  <ProjectReference Include="..\Silvester.Domain\Silvester.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="VoskConfiguration.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
