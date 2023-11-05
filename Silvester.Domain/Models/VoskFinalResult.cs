@@ -1,4 +1,4 @@
-﻿namespace VoskTest.Models;
+﻿namespace Silvester.Domain.Models;
 
 public class VoskFinalResult
 {

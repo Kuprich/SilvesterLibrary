@@ -1,11 +1,12 @@
 ﻿using FFMpegCore;
-using VoskTest.Extensions;
+using Silvester.Persistence.Abstractions;
+using Silvester.Persistence.Extensions;
 
-namespace VoskTest;
+namespace Silvester.Persistence.Services;
 
-public class AudioConvertService
+public class FFMpegAudioConvertService : IAudioConverterService
 {
-    public static string ConvertToWav(string inputAudioFilePath)
+    public string ConvertToWav(string audioFilePath)
     {
         string outputDirecroty = Path.Combine(Environment.CurrentDirectory, "output");
 
@@ -14,7 +15,7 @@ public class AudioConvertService
 
         string outputAudioFileName = Path.Combine(Environment.CurrentDirectory, "output", "output.wav");
         FFMpegArguments
-            .FromFileInput(inputAudioFilePath)
+            .FromFileInput(audioFilePath)
             .OutputToFile(outputAudioFileName, true, options => options
                 .WithAudioSamplingRate(48_000)
                 .WithArgument(new DownmixBothChannelsArgument()))

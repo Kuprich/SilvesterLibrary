@@ -1,34 +1,24 @@
 ﻿using Newtonsoft.Json;
+using Silvester.Domain.Models;
+using Silvester.Persistence.Abstractions;
 using Vosk;
-using VoskTest.Models;
 
-namespace VoskTest;
+namespace Silvester.Persistence.Services;
 
-public class RecognizeService
+public class VoskRecognizeService : IRecognizeService
 {
-    private Model _model;
-
-    public RecognizeService(string modelPath, int sampleRate = 48_000, int logLevel = 0)
-    {
-        _modelPath = modelPath;
-        _sampleRate = sampleRate;
-
-        SetLogLevel(logLevel);
-        _model = new(_modelPath);
-    }
-
-    private string _modelPath;
-    private int _sampleRate;
-    public static void SetLogLevel(int logLevel) => Vosk.Vosk.SetLogLevel(logLevel);
+    private void SetVoskLogLevel(int logLevel) => Vosk.Vosk.SetLogLevel(logLevel);
 
     public VoskFinalResult? RecognizeAudioFile(string audioFilePath)
     {
-        return DemoBytes(audioFilePath);
+        SetVoskLogLevel(0);
+        return DemoBytes(audioFilePath, "model-ru", 48_000);
     }
 
-    VoskFinalResult? DemoBytes(string audioFilePath)
+    VoskFinalResult? DemoBytes(string audioFilePath, string modelPath, int sampleRate)
     {
-        VoskRecognizer rec = new(_model, _sampleRate);
+        Model voskModel = new (modelPath);
+        VoskRecognizer rec = new(voskModel, sampleRate);
         rec.SetMaxAlternatives(0);
         rec.SetWords(true);
 

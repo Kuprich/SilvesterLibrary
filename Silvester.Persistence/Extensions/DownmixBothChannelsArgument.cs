@@ -1,9 +1,9 @@
 ﻿using FFMpegCore.Arguments;
 
-namespace VoskTest.Extensions;
+namespace Silvester.Persistence.Extensions;
 
 /// <summary>
-/// Downmix both channels
+/// FFmpeg extention. Argument which downmix both channels
 /// </summary>
 public class DownmixBothChannelsArgument : IArgument
 {

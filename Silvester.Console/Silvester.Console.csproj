@@ -8,9 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FFMpegCore" Version="5.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Vosk" Version="0.3.38" />
+    <ProjectReference Include="..\Silvester.Domain\Silvester.Domain.csproj" />
+    <ProjectReference Include="..\Silvester.Persistence\Silvester.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,11 @@
-﻿using VoskTest;
+﻿using Silvester.Persistence.Abstractions;
+using Silvester.Persistence.Services;
+
+IAudioConverterService audioConverterService = new FFMpegAudioConvertService();
+IRecognizeService recognizeService = new VoskRecognizeService();
 
 
-RecognizeService recognizeService = new(
-    modelPath: "model-ru",
-    sampleRate: 48_000,
-    logLevel: 0);
-
-string outputfilePath = AudioConvertService.ConvertToWav("Захаров.mp3");
+string outputfilePath = audioConverterService.ConvertToWav("Захаров.mp3");
 
 var result = recognizeService.RecognizeAudioFile(outputfilePath);
 
