@@ -18,8 +18,10 @@ public class FFMpegAudioConvertService : IAudioConverterService
             .FromFileInput(audioFilePath)
             .OutputToFile(outputAudioFileName, true, options => options
                 .WithAudioSamplingRate(48_000)
-                .WithArgument(new DownmixBothChannelsArgument()))
+                .WithArgument(new DownmixBothChannelsArgument())
+                .WithCustomArgument("-af \"arnndn=m=cb.rnnn\""))
             .ProcessSynchronously();
+
 
         return outputAudioFileName;
     }
