@@ -1,5 +1,5 @@
 {
-  "model": "model-ru",
+  "model": "src/model-ru",
   "bufferSize": 16000,
   "sampleRate": 48000
 }

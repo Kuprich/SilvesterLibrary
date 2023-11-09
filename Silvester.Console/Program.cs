@@ -4,10 +4,10 @@ using Silvester.Persistence.Services;
 IAudioConverterService audioConverterService = new FFMpegAudioConvertService();
 
 var recognizer = new VoskRecognitionService()
-    .WithConfigurationFromFile("VoskConfiguration.json").WithCustomModel("model-ru-full");
+    .WithConfigurationFromFile("VoskConfiguration.json").WithCustomModel("src/model-ru");
 
-string convertedAudiofile = audioConverterService.ConvertToWav("Захаров.mp3");
+string convertedAudiofile = audioConverterService.ConvertToWav("src/Захаров.mp3");
 
-Console.WriteLine(recognizer.RecognizeAudioFile(convertedAudiofile)?.Text);
-//Console.WriteLine(recognizer.RecognizeAudioFile($"output/output_denoise.wav")?.Text);
+var result = recognizer.RecognizeAudioFile(convertedAudiofile);
 
+Console.WriteLine(result?.Text);

@@ -19,9 +19,9 @@ public class FFMpegAudioConvertService : IAudioConverterService
             .OutputToFile(outputAudioFileName, true, options => options
                 .WithAudioSamplingRate(48_000)
                 .WithArgument(new DownmixBothChannelsArgument())
-                .WithCustomArgument("-af \"arnndn=m=cb.rnnn\""))
+                .WithAudioFilters(options => options
+                    .ArnndnDenoise("cb.rnnn")))
             .ProcessSynchronously();
-
 
         return outputAudioFileName;
     }

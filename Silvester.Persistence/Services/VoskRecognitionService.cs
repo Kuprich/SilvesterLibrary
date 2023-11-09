@@ -57,7 +57,6 @@ public class VoskRecognitionService
         }
 
         return JsonConvert.DeserializeObject<VoskFinalResult>(rec.FinalResult());
-
     }
 }
 
