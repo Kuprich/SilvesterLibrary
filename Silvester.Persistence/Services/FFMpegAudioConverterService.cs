@@ -4,7 +4,7 @@ using Silvester.Persistence.Extensions;
 
 namespace Silvester.Persistence.Services;
 
-public class FFMpegAudioConvertService : IAudioConverterService
+public class FFMpegAudioConverterService : IAudioConverterService
 {
     public string ConvertToWav(string audioFilePath)
     {

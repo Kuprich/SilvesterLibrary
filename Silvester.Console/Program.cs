@@ -1,13 +1,18 @@
 ﻿using Silvester.Persistence.Abstractions;
+using Silvester.Persistence.Extensions;
 using Silvester.Persistence.Services;
+using Silvester.Persistence.Services.VoskRecognitionService;
 
-IAudioConverterService audioConverterService = new FFMpegAudioConvertService();
+IAudioConverterService audioConverterService = new FFMpegAudioConverterService();
+IRecognitionService vosk = new VoskRecognitionService();
+IRecognitionServiceConfiguration voskConfiguration = new VoskConfiguration()
+    .WithConfigurationFromFile("VoskConfiguration.json");
 
-var recognizer = new VoskRecognitionService()
-    .WithConfigurationFromFile("VoskConfiguration.json").WithCustomModel("src/model-ru");
+vosk.Configure(voskConfiguration);
+
 
 string convertedAudiofile = audioConverterService.ConvertToWav("src/Захаров.mp3");
 
-var result = recognizer.RecognizeAudioFile(convertedAudiofile);
+var result = vosk.Transcribe(convertedAudiofile);
 
 Console.WriteLine(result?.Text);
