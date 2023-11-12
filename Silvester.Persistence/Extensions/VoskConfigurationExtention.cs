@@ -3,7 +3,7 @@ using Silvester.Persistence.Services.VoskRecognitionService;
 
 namespace Silvester.Persistence.Extensions;
 
-public static class VoskRecognitionServiceConfigurationExtention
+public static class VoskConfigurationExtention
 {
     public static VoskConfiguration WithConfigurationFromFile(this VoskConfiguration configuration, string jsonConfigurationFilePath)
     {
@@ -13,7 +13,7 @@ public static class VoskRecognitionServiceConfigurationExtention
         return configuration;
     }
 
-    public static VoskConfiguration WithCustomModel(this VoskConfiguration configuration, string modelFileName)
+    public static VoskConfiguration WithModel(this VoskConfiguration configuration, string modelFileName)
     {
         configuration.Model = modelFileName;
         return configuration;
@@ -22,6 +22,11 @@ public static class VoskRecognitionServiceConfigurationExtention
     public static VoskConfiguration WithSampleRate(this VoskConfiguration configuration, int sampleRate)
     {
         configuration.SampleRate = sampleRate;
+        return configuration;
+    }
+    public static VoskConfiguration WithBufferSize(this VoskConfiguration configuration, int bufferSize)
+    {
+        configuration.BufferSize = bufferSize;
         return configuration;
     }
 }

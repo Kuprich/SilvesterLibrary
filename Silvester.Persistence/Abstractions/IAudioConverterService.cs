@@ -8,4 +8,8 @@ public interface IAudioConverterService
     /// <param name="audioFilePath">Path to source audio file</param>
     /// <returns>Path to the converted audiofile</returns>
     string ConvertToWav(string audioFilePath);
+
+    IAudioConverterService Configure(IAudioConverterServiceConfiguration configuration);
 }
+
+public interface IAudioConverterServiceConfiguration { }
