@@ -1,4 +1,4 @@
 {
-  "arrndnModel": "cb.rnnn",
-  "samplingRate": 48000
+  "arrndnModel": "src/ffmpeg/cb.rnnn",
+  "samplingRate": 16000
 }

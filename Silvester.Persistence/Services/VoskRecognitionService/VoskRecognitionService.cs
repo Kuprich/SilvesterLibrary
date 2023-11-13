@@ -1,29 +1,26 @@
 ﻿using Newtonsoft.Json;
-using Silvester.Domain.Models;
 using Silvester.Persistence.Abstractions;
 using Vosk;
 
 namespace Silvester.Persistence.Services.VoskRecognitionService;
 
-public class VoskRecognitionService : IRecognitionService
+public class VoskRecognitionService : IRecognitionService<VoskConfiguration, VoskResult>
 {
+    public VoskConfiguration Configuration { get; set; } = new VoskConfiguration();
 
-    public VoskConfiguration Configuration { get; set; }
+    public VoskResult? Result { get; private set; }
 
     private void SetVoskLogLevel(int logLevel) => Vosk.Vosk.SetLogLevel(logLevel);
-    
-    public IRecognitionService Configure(IRecognitionServiceConfiguration configuration)
-    {
-        Configuration = (VoskConfiguration)configuration;
-        return this;
-    }
 
-    public VoskFinalResult Transcribe(string audioFilePath)
+    public VoskRecognitionService(VoskConfiguration configuration)
+        => Configure(configuration);
+
+    public VoskResult Transcribe(string audioFilePath)
     {
         SetVoskLogLevel(0);
         return DemoBytes(audioFilePath);
     }
-    VoskFinalResult? DemoBytes(string audioFilePath)
+    VoskResult? DemoBytes(string audioFilePath)
     {
         Model voskModel = new(Configuration.Model);
         VoskRecognizer rec = new(voskModel, Configuration.SampleRate);
@@ -39,10 +36,18 @@ public class VoskRecognitionService : IRecognitionService
                 rec.AcceptWaveform(buffer, bytesRead);
         }
 
-        return JsonConvert.DeserializeObject<VoskFinalResult>(rec.FinalResult());
+        Result = JsonConvert.DeserializeObject<VoskResult>(rec.FinalResult());
+
+        return Result;
+    }
+
+    public IRecognitionService<VoskConfiguration, VoskResult> Configure(VoskConfiguration configuration)
+    {
+        Configuration = configuration;
+        Result = new();
+        return this;
     }
 }
-
 
 
 

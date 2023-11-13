@@ -1,31 +1,24 @@
 ﻿using Silvester.Persistence.Abstractions;
-using Silvester.Persistence.Extensions;
+using Silvester.Persistence.Services.Extensions;
 using Silvester.Persistence.Services.FFMpegConverterService;
 using Silvester.Persistence.Services.VoskRecognitionService;
+using Silvester.Persistence.Services.WhishperRecognitionService;
+
+IAudioConverterService<FFMpegConfiguration> ffmpeg = new FFMpegConverterService(
+    new FFMpegConfiguration()
+        .WithConfigurationFromFile("FFMpegConfiguration.json"));
+
+IRecognitionService<VoskConfiguration, VoskResult> vosk = new VoskRecognitionService(
+    new VoskConfiguration()
+        .WithConfigurationFromFile("VoskConfiguration.json"));
 
 
-
-IAudioConverterServiceConfiguration ffmpegConfiguration = new FFMpegConfiguration()
-    .WithConfigurationFromFile("FFMpegConfiguration.json");
-    //.WithArrndnModel("cb.rnnn")
-    //.WithSamplingRate(48_000);
-
-IAudioConverterService ffmpeg = new FFMpegConverterService()
-    .Configure(ffmpegConfiguration);
-
-IRecognitionServiceConfiguration voskConfiguration = new VoskConfiguration()
-    //.WithConfigurationFromFile("VoskConfiguration.json");
-    .WithModel("src/model-ru")
-    .WithSampleRate(48_000)
-    .WithBufferSize(16_000);
-
-IRecognitionService vosk = new VoskRecognitionService()
-    .Configure(voskConfiguration);
-
-
+IRecognitionService<WhishperConfiguration, WhishperResult> whisper = new WhishperRecognitionService(
+    new WhishperConfiguration()
+        .WithConfigurationFromFile("WhishperConfiguration.json"));
 
 string convertedAudiofile = ffmpeg.ConvertToWav("src/Захаров.mp3");
 
-var result = vosk.Transcribe(convertedAudiofile);
+var result = whisper.Transcribe(convertedAudiofile);
 
-Console.WriteLine(result?.Text);
+Console.WriteLine(result);

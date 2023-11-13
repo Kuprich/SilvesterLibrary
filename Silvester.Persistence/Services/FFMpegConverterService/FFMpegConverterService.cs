@@ -1,17 +1,15 @@
 ﻿using FFMpegCore;
 using Silvester.Persistence.Abstractions;
-using Silvester.Persistence.Extensions;
+using Silvester.Persistence.Services.Extensions.FFmpeg;
 
 namespace Silvester.Persistence.Services.FFMpegConverterService;
 
-public class FFMpegConverterService : IAudioConverterService
+public class FFMpegConverterService : IAudioConverterService<FFMpegConfiguration>
 {
     public FFMpegConfiguration Configuration { get; set; } = new FFMpegConfiguration();
-    public IAudioConverterService Configure(IAudioConverterServiceConfiguration configuration)
-    {
-        Configuration = (FFMpegConfiguration)configuration;
-        return this;
-    }
+
+    public FFMpegConverterService(FFMpegConfiguration configuration)
+        => Configure(configuration);
 
     public string ConvertToWav(string audioFilePath)
     {
@@ -31,5 +29,11 @@ public class FFMpegConverterService : IAudioConverterService
             .ProcessSynchronously();
 
         return outputAudioFileName;
+    }
+
+    public IAudioConverterService<FFMpegConfiguration> Configure(FFMpegConfiguration configuration)
+    {
+        Configuration = configuration;
+        return this;
     }
 }

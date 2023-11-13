@@ -1,6 +1,6 @@
 ﻿using FFMpegCore.Arguments;
 
-namespace Silvester.Persistence.Extensions;
+namespace Silvester.Persistence.Services.Extensions.FFmpeg;
 
 public class ArnndnArgument : IAudioFilterArgument
 {

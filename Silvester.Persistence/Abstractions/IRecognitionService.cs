@@ -1,14 +1,9 @@
-﻿using Silvester.Domain.Models;
+﻿namespace Silvester.Persistence.Abstractions;
 
-namespace Silvester.Persistence.Abstractions;
-
-public interface IRecognitionService
+public interface IRecognitionService<TConfig, TResult> 
+    where TConfig : IServiceConfiguration
+    where TResult : ITranscribeResult
 {
-    IRecognitionService Configure(IRecognitionServiceConfiguration configuration);
-    VoskFinalResult Transcribe(string audioFilePath);
-}
-
-public interface IRecognitionServiceConfiguration
-{
-
+    IRecognitionService<TConfig, TResult> Configure(TConfig configuration);
+    TResult Transcribe(string audioFilePath);
 }

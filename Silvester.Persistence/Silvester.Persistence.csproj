@@ -10,13 +10,14 @@
 		<PackageReference Include="FFMpegCore" Version="5.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Vosk" Version="0.3.38" />
+		<PackageReference Include="Whisper.net" Version="1.4.7" />
+		<PackageReference Include="Whisper.net.Runtime" Version="1.4.7" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Silvester.Domain\Silvester.Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <None Update="WhishperConfiguration.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="VoskConfiguration.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

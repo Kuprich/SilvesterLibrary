@@ -1,6 +1,6 @@
 ﻿namespace Silvester.Persistence.Abstractions;
 
-public interface IAudioConverterService
+public interface IAudioConverterService<T> where T : IServiceConfiguration
 {
     /// <summary>
     /// Convert audio file to .wav
@@ -9,7 +9,5 @@ public interface IAudioConverterService
     /// <returns>Path to the converted audiofile</returns>
     string ConvertToWav(string audioFilePath);
 
-    IAudioConverterService Configure(IAudioConverterServiceConfiguration configuration);
+    IAudioConverterService<T> Configure(T configuration);
 }
-
-public interface IAudioConverterServiceConfiguration { }
