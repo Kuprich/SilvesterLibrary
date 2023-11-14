@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvester.Console", "Silvester.Console\Silvester.Console.csproj", "{98C35AE0-7BBD-42EA-98B7-F545E08BF4DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvester.WhisperDemo", "Silvester.WhisperDemo\Silvester.WhisperDemo.csproj", "{98C35AE0-7BBD-42EA-98B7-F545E08BF4DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvester.Persistence", "Silvester.Persistence\Silvester.Persistence.csproj", "{8E6DEBB4-103D-4366-B384-ADA4A03A16B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silvester", "Silvester\Silvester.csproj", "{8E6DEBB4-103D-4366-B384-ADA4A03A16B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silvester.VoskDemo", "Silvester.VoskDemo\Silvester.VoskDemo.csproj", "{5DB97A4E-C611-481B-961A-5F6BE6F2E978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8E6DEBB4-103D-4366-B384-ADA4A03A16B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E6DEBB4-103D-4366-B384-ADA4A03A16B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E6DEBB4-103D-4366-B384-ADA4A03A16B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DB97A4E-C611-481B-961A-5F6BE6F2E978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DB97A4E-C611-481B-961A-5F6BE6F2E978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DB97A4E-C611-481B-961A-5F6BE6F2E978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DB97A4E-C611-481B-961A-5F6BE6F2E978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
