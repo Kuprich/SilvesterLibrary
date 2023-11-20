@@ -1,0 +1,4 @@
+{
+  "model": "src/whisper/ggml-large-v1.bin",
+  "language": "auto"
+}

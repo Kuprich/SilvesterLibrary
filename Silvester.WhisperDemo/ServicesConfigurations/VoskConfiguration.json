@@ -1,5 +1,5 @@
 {
-  "model": "src/vosk/model-ru",
+  "model": "src/vosk/model-ru-full",
   "bufferSize": 16000,
   "sampleRate": 48000
 }

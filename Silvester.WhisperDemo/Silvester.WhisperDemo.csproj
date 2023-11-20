@@ -8,7 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="bin\Release\net6.0\src\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="bin\Release\net6.0\src\**" />
+    <None Remove="bin\**" />
+    <None Remove="bin\Release\net6.0\src\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Silvester\Silvester.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ServicesConfigurations\FFMpegConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ServicesConfigurations\VoskConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ServicesConfigurations\WhisperConfiguration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

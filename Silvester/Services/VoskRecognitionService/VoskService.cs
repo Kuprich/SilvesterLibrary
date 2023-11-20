@@ -20,6 +20,13 @@ public class VoskService : IRecognitionService<VoskConfiguration, VoskResult>
         SetVoskLogLevel(0);
         return DemoBytes(audioFilePath);
     }
+
+    public async Task<VoskResult?> TranscribeAsync(string audioFilePath)
+    {
+        var result = await Task.Run(() => Transcribe(audioFilePath));
+        return result;
+    }
+
     VoskResult? DemoBytes(string audioFilePath)
     {
         Model voskModel = new(Configuration.Model);

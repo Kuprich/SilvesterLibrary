@@ -20,6 +20,14 @@ public class WhisperService : IRecognitionService<WhisperConfiguration, WhisperR
 
     public WhisperResult? Transcribe(string audioFilePath)
     {
+
+        var result = Task.Run(async () => await TranscribeAsync(audioFilePath)).Result;
+
+        return result;
+    }
+
+    public async Task<WhisperResult?> TranscribeAsync(string audioFilePath)
+    {
         using var whisperFactory = WhisperFactory.FromPath(Configuration.Model);
 
         using var processor = whisperFactory.CreateBuilder()
@@ -28,16 +36,14 @@ public class WhisperService : IRecognitionService<WhisperConfiguration, WhisperR
 
         using var fileStream = File.OpenRead(audioFilePath);
 
-        Task.Run(async () =>
+        await foreach (var segment in processor.ProcessAsync(fileStream))
         {
-            await foreach (var segment in processor.ProcessAsync(fileStream))
-            {
-                Result?.Segments?.Add(segment);
-            }
-        }).Wait();
+            Result?.Segments?.Add(segment);
+        }
 
         return Result;
     }
+
 }
 
 

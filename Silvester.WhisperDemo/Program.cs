@@ -1,25 +1,29 @@
 ﻿using Silvester.Abstractions;
-using Silvester.Extensions;
 using Silvester.Services.FFMpegConverterService;
 using Silvester.Services.WhisperRecognitionService;
 
-// initialize FFMpeg configuration
-var ffmpegConfiguration = new FFMpegConfiguration()
-    .WithConfigurationFromFile("Services/FFMpegConfiguration.json");
 
 // initialize FFMpeg converter service
-IAudioConverterService<FFMpegConfiguration> ffmpeg = new FFMpegService(ffmpegConfiguration);
+IAudioConverterService<FFMpegConfiguration> ffmpeg = new FFMpegService(
+    new FFMpegConfiguration
+    {
+        ArrndnModel = "src/ffmpeg/cb.rnnn",
+        SamplingRate = 16000
+    });
 
 // initialize whisper recognition service
 IRecognitionService<WhisperConfiguration, WhisperResult> whisper = new WhisperService(
     new WhisperConfiguration()
-        .WithConfigurationFromFile("Services/WhisperConfiguration.json"));
+    {
+        Model = "src/whisper/ggml-base.bin",
+        Language = "auto"
+    });
 
-string convertedAudiofile = ffmpeg.ConvertToWav("src/test.wav");
+string convertedAudiofile = ffmpeg.ConvertToWav("src/small.mp3");
 
-var result = whisper.Transcribe(convertedAudiofile);
+var result = await whisper.TranscribeAsync(convertedAudiofile);
 
 Console.WriteLine($"{new string('-', 30)}\n\n{result}\n\n{new string('-', 30)}");
 
-
+Console.ReadKey();
 

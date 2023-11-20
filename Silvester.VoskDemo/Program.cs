@@ -17,7 +17,7 @@ IRecognitionService<VoskConfiguration, VoskResult> vosk = new VoskService(
     new VoskConfiguration()
         .WithConfigurationFromFile("Services/VoskConfiguration.json"));
 
-string convertedAudiofile = ffmpeg.ConvertToWav("src/test.wav");
+string convertedAudiofile = ffmpeg.ConvertToWav("src/small.mp3");
 
 var result = vosk.Transcribe(convertedAudiofile);
 

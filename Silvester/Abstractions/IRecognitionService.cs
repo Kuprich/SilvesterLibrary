@@ -6,5 +6,6 @@ public interface IRecognitionService<TConfig, TResult>
 {
     IRecognitionService<TConfig, TResult> Configure(TConfig configuration);
     TResult? Transcribe(string audioFilePath);
+    Task<TResult?> TranscribeAsync(string audioFilePath);
     TResult? Result { get; set; }
 }
