@@ -1,7 +1,6 @@
 ## Silvester
 
 This utility allows you to extract text from an audio file
-Solution 
 
 Silvester project is based on following two speech recognition services: [Vosk](https://alphacephei.com/vosk/) and [Whishper](https://github.com/sandrohanea/whisper.net)
 
